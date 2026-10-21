@@ -1,0 +1,31 @@
+[package]
+name = "bitcoin_uri-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+bitcoin = { version = "0.32.102", features = ["std"] }
+bitcoin_uri = { path = "..", features = ["std"] }
+libfuzzer-sys = { version = "0.4.10", features = ["arbitrary-derive"] }
+
+# An empty workspace keeps cargo at the crate root from building the fuzz targets.
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "parse_display"
+path = "fuzz_targets/parse_display.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "build_parse"
+path = "fuzz_targets/build_parse.rs"
+test = false
+doc = false
+bench = false

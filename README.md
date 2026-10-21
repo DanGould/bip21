@@ -26,6 +26,18 @@ The crate is `no_std` but does require `alloc`.
 
 1.63
 
+## Fuzzing
+
+`fuzz/` holds two cargo-fuzz targets, which need a nightly toolchain:
+
+* `parse_display`: a string that parses displays back unchanged.
+* `build_parse`: a `UriBuilder` output parses back to the same `Uri`.
+
+```sh
+cargo +nightly fuzz run parse_display
+cargo +nightly fuzz run build_parse
+```
+
 ## License
 
 MITNFA
